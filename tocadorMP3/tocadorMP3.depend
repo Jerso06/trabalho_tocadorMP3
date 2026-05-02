@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1777651468 source:c:\users\jedson\onedrive\Área de trabalho\ifsp\estrutura de dados 1\tocadormp3\main.c
+	<stdlib.h>
+	<stdio.h>
+	<stdbool.h>
+	<string.h>
+
+1777651468 source:c:\users\jedson\onedrive\Área de trabalho\trabalho_tocadormp3\tocadormp3\main.c
+	<stdlib.h>
+	<stdio.h>
+	<stdbool.h>
+	<string.h>
+
