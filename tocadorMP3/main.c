@@ -252,6 +252,7 @@ int main (){
     int opcao = -1;
     int posicao;
     int verificaLoop = 0;
+    int cont = 0;
     Node *musicaAtual = Radio->begin;
     char nomeAtual[50];
     time_t ultimoTempo = time(NULL);
@@ -272,16 +273,22 @@ int main (){
             if(verificaLoop == 0){
                 musicaAtual = musicaAtual->next;
                 printf("\nTroca automatica -> %d - %s\n\n",posicao_musica(Radio, musicaAtual->musica), musicaAtual->musica);
+                cont = 0;
             }else{
-                printf("Musica em looping: %d - %s\n\n",posicao_musica(Radio, musicaAtual->musica), musicaAtual->musica);
+                printf("\nMusica em looping: %d - %s\n\n",posicao_musica(Radio, musicaAtual->musica), musicaAtual->musica);
+                cont = 0;
             }
 
 
             ultimoTempo = tempoAtual;
         }
 
-        if(kbhit()){
+        if(cont == 0){
             printf("Opcao: ");
+            cont++;
+        }
+
+        if(kbhit()){
             scanf("%d", &opcao);
 
 
@@ -341,11 +348,15 @@ int main (){
                     printf("Indo para a musica final: %d - %s",posicao_musica(Radio, musicaAtual->musica), musicaAtual->musica);
                     verificaLoop = 0;
                     break;
+                case 10:
+                    LinkedList_print(Radio);
+                    break;
                 default:
                     break;
             }
 
             ultimoTempo = tempoAtual;
+            cont = 0;
             printf("\n\n");
         }
     }
