@@ -254,7 +254,7 @@ int main (){
     int verificaLoop = 0;
     Node *musicaAtual = Radio->begin;
     char nomeAtual[50];
-    time_t tempoFinal = time(NULL);
+    time_t ultimoTempo = time(NULL);
 
     printf("****RADIO FM**** \n\n");
     printf("Musica Atual: %d - %s\n\n",posicao_musica(Radio, musicaAtual->musica), musicaAtual->musica);
@@ -268,7 +268,7 @@ int main (){
 
         time_t tempoAtual = time(NULL);
 
-        if(difftime(tempoAtual, tempoFinal) >= 10){
+        if(difftime(tempoAtual, ultimoTempo) >= 10){
             if(verificaLoop == 0){
                 musicaAtual = musicaAtual->next;
                 printf("\nTroca automatica -> %d - %s\n\n",posicao_musica(Radio, musicaAtual->musica), musicaAtual->musica);
@@ -277,7 +277,7 @@ int main (){
             }
 
 
-            tempoFinal = tempoAtual;
+            ultimoTempo = tempoAtual;
         }
 
         if(kbhit()){
@@ -345,7 +345,7 @@ int main (){
                     break;
             }
 
-            tempoFinal = time(NULL);
+            ultimoTempo = tempoAtual;
             printf("\n\n");
         }
     }
