@@ -167,37 +167,72 @@ void LinkedList_print(LinkedList *L) {
     printf(" Fim da Fila");
 }
 
+char* LinkedList_nomePorNumero(LinkedList *L, int num){
+    Node *p = L->begin;
+    for(int i=0; i<L->cont; i++){
+        if(num == i){
+            return p->musica;
+        }
+        p = p->next;
+    }
+    return NULL;
+}
+
+void LinkedList_delete(LinkedList * L){
+    while(L->cont > 0){
+        LinkedList_remove(L, L->begin->musica);
+    }
+}
+
 //funcoes do radio
 void LinkedList_shuffle_radio(LinkedList *R){
+
+    srand((unsigned)time(NULL));
+
     LinkedList *L = LinkedList_create();
-    LinkedList *Result = LinkedList_create();
-    LinkedList_copia_invertida(R, L);
 
     Node *pR = R->begin;
-    Node *pL = L->begin;
-    Node *pResult = NULL;
 
     int contador = R->cont;
-    int metadeCont = contador / 2;
 
-    for(int i = 0; i < metadeCont; i++){
-        LinkedList_add_last(Result, pR->musica);
-        LinkedList_add_last(Result, pL->musica);
-        pR = pR->next;
+    int musicasForam[contador];
+
+    for(int i= 0; i < contador; i++){
+        int r = rand() % contador;
+        int existe = 0;
+        while(true){
+            existe = 0;
+            for(int j = 0; j < i; j++){
+                if(r == musicasForam[j]){
+                    existe++;
+                    break;
+                }
+            }
+            if(existe > 0){
+                r = rand() % contador;
+            }
+            else{
+                break;
+            }
+        }
+        musicasForam[i] = r;
+    }
+
+    for(int i=0;i<contador;i++){
+        char *nome = LinkedList_nomePorNumero(R, musicasForam[i]);
+        if(nome != NULL){
+            LinkedList_add_last(L, nome);
+        }
+    }
+    Node *pL = L->begin;
+    LinkedList_delete(R);
+    for(int i=0;i<contador;i++){
+        LinkedList_add_last(R, pL->musica);
         pL = pL->next;
     }
 
-    //adiciona o elemento do meio se for impar
-    if(contador % 2 != 0){
-        LinkedList_add_last(Result, pR->musica);
-    }
 
-    R->begin = Result->begin;
-    R->end = Result->end;
-    R->cont = Result->cont;
 
-    free(L);
-    free(Result);
 }
 
 Node* musica_selecionada_por_numero(LinkedList *R, Node *p, int num){
