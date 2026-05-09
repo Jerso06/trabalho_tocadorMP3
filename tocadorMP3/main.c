@@ -200,6 +200,7 @@ void LinkedList_shuffle_radio(LinkedList *R){
     for(int i= 0; i < contador; i++){
         int r = rand() % contador;
         int existe = 0;
+
         while(true){
             existe = 0;
             for(int j = 0; j < i; j++){
@@ -224,6 +225,7 @@ void LinkedList_shuffle_radio(LinkedList *R){
             LinkedList_add_last(L, nome);
         }
     }
+
     Node *pL = L->begin;
     LinkedList_delete(R);
     for(int i=0;i<contador;i++){
@@ -283,6 +285,9 @@ int main (){
     LinkedList_add_first(Radio, "Feel Good Inc.");
     LinkedList_add_first(Radio, "Rhinestone Eyes");
     LinkedList_add_first(Radio, "El manana");
+    LinkedList_add_first(Radio, "Dare");
+    LinkedList_add_first(Radio, "Tranz");
+    LinkedList_add_first(Radio, "Strobelite");
 
     int opcao = -1;
     int posicao;
@@ -292,7 +297,18 @@ int main (){
     char nomeAtual[50];
     time_t ultimoTempo = time(NULL);
 
-    printf("****RADIO FM**** \n\n");
+    printf("Funcoes: \n");
+    printf("1 - Mostrar musica atual.\n");
+    printf("2 - Avancar para a proxima musica\n");
+    printf("3 - Voltar para a musica anterior\n");
+    printf("4 - Reposicionar o inicio da lista.\n");
+    printf("5 - Repetir a musica.\n");
+    printf("6 - Embaralhar a lista de musicas.\n");
+    printf("7 - Selecionar musica pela posicao.\n");
+    printf("8 - Ir para a primeira musica da lista.\n");
+    printf("9 - Ir para a ultima musica da lista.\n\n");
+
+    printf("=======RADIO FM======= \n");
     printf("Musica Atual: %d - %s\n\n",posicao_musica(Radio, musicaAtual->musica), musicaAtual->musica);
 
     if(musicaAtual == NULL){
@@ -396,7 +412,7 @@ int main (){
         }
     }
 
-    printf("****Desligando o Radio****");
+    printf("=====Desligando o Radio=====\n");
 
     return (0);
 }

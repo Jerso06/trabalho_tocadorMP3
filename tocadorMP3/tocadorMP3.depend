@@ -5,11 +5,13 @@
 	<stdbool.h>
 	<string.h>
 
-1777651468 source:c:\users\jedson\onedrive\Área de trabalho\trabalho_tocadormp3\tocadormp3\main.c
+1778348503 source:c:\users\jedson\onedrive\Área de trabalho\trabalho_tocadormp3\tocadormp3\main.c
 	<stdlib.h>
 	<stdio.h>
 	<stdbool.h>
 	<string.h>
+	<time.h>
+	<conio.h>
 
 1778252922 source:c:\users\jedso\onedrive\Área de trabalho\trabalho_tocadormp3\tocadormp3\main.c
 	<stdlib.h>
