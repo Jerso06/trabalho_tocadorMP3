@@ -226,15 +226,16 @@ void LinkedList_shuffle_radio(LinkedList *R){
         }
     }
 
-    Node *pL = L->begin;
     LinkedList_delete(R);
+    LinkedList_copia(L, R);
+    LinkedList_delete(L);
+    free(L);
+
+    /*Node *pL = L->begin;
     for(int i=0;i<contador;i++){
         LinkedList_add_last(R, pL->musica);
         pL = pL->next;
-    }
-
-
-
+    }*/
 }
 
 Node* musica_selecionada_por_numero(LinkedList *R, Node *p, int num){
@@ -299,14 +300,15 @@ int main (){
 
     printf("Funcoes: \n");
     printf("1 - Mostrar musica atual.\n");
-    printf("2 - Avancar para a proxima musica\n");
-    printf("3 - Voltar para a musica anterior\n");
+    printf("2 - Avancar para a proxima musica.\n");
+    printf("3 - Voltar para a musica anterior.\n");
     printf("4 - Reposicionar o inicio da lista.\n");
     printf("5 - Repetir a musica.\n");
     printf("6 - Embaralhar a lista de musicas.\n");
     printf("7 - Selecionar musica pela posicao.\n");
     printf("8 - Ir para a primeira musica da lista.\n");
-    printf("9 - Ir para a ultima musica da lista.\n\n");
+    printf("9 - Ir para a ultima musica da lista.\n");
+    printf("10 - Mostar fila.\n\n");
 
     printf("=======RADIO FM======= \n");
     printf("Musica Atual: %d - %s\n\n",posicao_musica(Radio, musicaAtual->musica), musicaAtual->musica);
@@ -323,10 +325,10 @@ int main (){
         if(difftime(tempoAtual, ultimoTempo) >= 10){
             if(verificaLoop == 0){
                 musicaAtual = musicaAtual->next;
-                printf("\nTroca automatica -> %d - %s\n\n",posicao_musica(Radio, musicaAtual->musica), musicaAtual->musica);
+                printf("\n\nTroca automatica -> %d - %s\n\n",posicao_musica(Radio, musicaAtual->musica), musicaAtual->musica);
                 cont = 0;
             }else{
-                printf("\nMusica em looping: %d - %s\n\n",posicao_musica(Radio, musicaAtual->musica), musicaAtual->musica);
+                printf("\n\nMusica em looping: %d - %s\n\n",posicao_musica(Radio, musicaAtual->musica), musicaAtual->musica);
                 cont = 0;
             }
 
@@ -345,32 +347,32 @@ int main (){
 
             switch(opcao){
                 case 1:
-                    printf("Musica Atual: %d - %s",posicao_musica(Radio, musicaAtual->musica), musicaAtual->musica);
+                    printf("\nMusica Atual: %d - %s",posicao_musica(Radio, musicaAtual->musica), musicaAtual->musica);
                     break;
                 case 2:
                     if(verificaLoop == 0){
                         musicaAtual = musicaAtual->next;
                     }
-                    printf("Musica Atual: %d - %s",posicao_musica(Radio, musicaAtual->musica), musicaAtual->musica);
+                    printf("\nMusica Atual: %d - %s",posicao_musica(Radio, musicaAtual->musica), musicaAtual->musica);
                     break;
                 case 3:
                     if(verificaLoop == 0){
                         musicaAtual = musicaAtual->prev;
                     }
-                    printf("Musica Atual: %d - %s",posicao_musica(Radio, musicaAtual->musica), musicaAtual->musica);
+                    printf("\nMusica Atual: %d - %s",posicao_musica(Radio, musicaAtual->musica), musicaAtual->musica);
                     break;
                 case 4:
                     Radio->begin = musicaAtual;
                     Radio->end = musicaAtual->prev;
-                    printf("Novo inicio da fila\n");
+                    printf("\nNovo inicio da fila\n");
                     LinkedList_print(Radio);
                     break;
                 case 5:
                     if(verificaLoop == 0){
-                        printf("Musica em looping: %d - %s",posicao_musica(Radio, musicaAtual->musica), musicaAtual->musica);
+                        printf("\nMusica em looping: %d - %s",posicao_musica(Radio, musicaAtual->musica), musicaAtual->musica);
                         verificaLoop = 1;
                     }else{
-                        printf("Saindo do looping...");
+                        printf("\nSaindo do looping...");
                         verificaLoop = 0;
                     }
                     break;
@@ -378,7 +380,7 @@ int main (){
                     strcpy(nomeAtual, musicaAtual->musica);
                     LinkedList_shuffle_radio(Radio);
                     musicaAtual = encontrar_musica(Radio, nomeAtual);
-                    printf("Fila embaralhada \nNova ordem: ");
+                    printf("\nFila embaralhada \nNova ordem: ");
                     LinkedList_print(Radio);
                     verificaLoop = 0;
                     break;
@@ -386,17 +388,17 @@ int main (){
                     printf("Posicao da musica: ");
                     scanf("%d", &posicao);
                     musicaAtual = musica_selecionada_por_numero(Radio, musicaAtual, posicao);
-                    printf("Musica selecionada: %d - %s",posicao_musica(Radio, musicaAtual->musica), musicaAtual->musica);
+                    printf("\nMusica selecionada: %d - %s",posicao_musica(Radio, musicaAtual->musica), musicaAtual->musica);
                     verificaLoop = 0;
                     break;
                 case 8:
                     musicaAtual = Radio->begin;
-                    printf("Indo para a musica inicial: %d - %s",posicao_musica(Radio, musicaAtual->musica), musicaAtual->musica);
+                    printf("\nIndo para a musica inicial: %d - %s",posicao_musica(Radio, musicaAtual->musica), musicaAtual->musica);
                     verificaLoop = 0;
                     break;
                 case 9:
                     musicaAtual = Radio->end;
-                    printf("Indo para a musica final: %d - %s",posicao_musica(Radio, musicaAtual->musica), musicaAtual->musica);
+                    printf("\nIndo para a musica final: %d - %s",posicao_musica(Radio, musicaAtual->musica), musicaAtual->musica);
                     verificaLoop = 0;
                     break;
                 case 10:
