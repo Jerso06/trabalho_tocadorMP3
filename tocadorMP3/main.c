@@ -231,11 +231,6 @@ void LinkedList_shuffle_radio(LinkedList *R){
     LinkedList_delete(L);
     free(L);
 
-    /*Node *pL = L->begin;
-    for(int i=0;i<contador;i++){
-        LinkedList_add_last(R, pL->musica);
-        pL = pL->next;
-    }*/
 }
 
 Node* musica_selecionada_por_numero(LinkedList *R, Node *p, int num){
@@ -404,7 +399,10 @@ int main (){
                 case 10:
                     LinkedList_print(Radio);
                     break;
+                case 0:
+                    break;
                 default:
+                    printf("Opcao invalida, digite uma opcao correta.");
                     break;
             }
 
